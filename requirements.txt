@@ -1,0 +1,41 @@
+# Knowledge Representation using First-Order Logic with IDP3
+# Python Dependencies
+
+# Note: This project primarily uses Python standard library modules
+# The following are the core dependencies that are used:
+
+# Standard library modules used (no installation required):
+# - http.server
+# - urllib.parse
+# - io
+# - os
+# - subprocess
+# - json
+# - shutil
+# - platform
+# - zipfile
+# - shlex
+# - re
+
+# Optional dependencies for enhanced functionality:
+
+# For production deployment (optional)
+gunicorn>=20.1.0
+
+# For development and testing (optional)
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# For code formatting and linting (optional)
+black>=22.0.0
+flake8>=5.0.0
+
+# For type checking (optional)
+mypy>=1.0.0
+
+# For documentation generation (optional)
+sphinx>=5.0.0
+sphinx-rtd-theme>=1.0.0
+
+# For development environment (optional)
+python-dotenv>=0.19.0 
