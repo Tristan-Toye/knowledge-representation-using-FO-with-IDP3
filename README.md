@@ -25,7 +25,6 @@ The MCS25 (Modeling and Constraint Solving) project consists of two main parts:
 - **Grading**: Automatic correction through model checking (2.5 points)
 
 ## The Set Game
-
 The project implements a variation of the classic "Set" card game where:
 
 - **Cards** have four properties: Number (1,2,3), Color (Red,Green,Orange), Shade (Empty,Stripes,Full), Shape (Diamond,Squiggle,Oval)
