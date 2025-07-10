@@ -1,0 +1,45 @@
+theory T_constraints : V_final {
+
+    numberOfCards = MAX[:Order].
+
+    {
+       ! t : gameOver(t) <- subsequentPasses(t) = numberOfPlayers & inTheDeck(t) = numberOfCards.
+    }
+
+    #{c: table(Start, c)} = 9.
+    !o[Order]: o =< 9 => table(Start, deck(o)).
+    !o[Order]: o > 9 => ~table(Start, deck(o)).
+    !t[Time] p[Player] c[Card]: selected(t, p, c) => table(t, c).
+    !t[Time] p[Player] c[Card]: selected(t, p, c) => (atMove(t) = p & guesSet(t, p)).
+    !t[Time]: subsequentPasses(t) = numberOfPlayers => deal(t, atMove(t)) | gameOver(t).
+    !t[Time] p[Player]: guesSet(t, p) => atMove(t) = p.
+    !t[Time] p[Player]: noSet(t, p) => atMove(t) = p.
+    !t[Time] p[Player]: deal(t, p) => atMove(t) = p.
+    !t[Time]: #{p: (guesSet(t, p) | noSet(t, p) | deal(t, p))} = 1 | gameOver(t).
+    !t[Time]: (?p[Player]: guesSet(t, p) | noSet(t, p) | deal(t, p)) | gameOver(t).
+    !t[Time] p[Player]: guesSet(t, p) => possibleActions(t, guesSetA(p)).
+    !t[Time] p[Player]: noSet(t, p) => possibleActions(t, noSetA(p)).
+    !t[Time] p[Player]: deal(t, p) => possibleActions(t, dealA(p)).
+
+    // at least 2 players
+    numberOfPlayers > startPlayer.
+    // deck inertia on noset or guess
+    ! t : (noSet(t,atMove(t)) | guesSet(t,atMove(t))) => inTheDeck(t) = inTheDeck(Next(t)).
+    // the deck pointer is increased with 3 on dealing or is equel to the amount of cards
+    ! t : deal(t,atMove(t)) => (inTheDeck(t) + 3 = inTheDeck(Next(t))) | ( numberOfCards = inTheDeck(Next(t))).
+    // when dealing, three cards are added to the desk
+    ! t: deal(t,atMove(t)) => #{ c: table(t, c)} + 3 = #{ c: table(Next(t), c)}.
+    // table does not change when no set or incorrect guess
+    ! t: noSet(t,atMove(t)) | score(t, atMove(t)) - 1 = score(Next(t), atMove(t))
+        => #{ c: table(t, c)} = #{ c: table(Next(t), c)}.
+    // 3 cards are removed when there was a correct guess
+    ! t: score(t, atMove(t)) + 3 + subsequentPasses(t) = score(Next(t), atMove(t))
+    => #{ c: table(t, c)} - 3 = #{ c: table(Next(t), c)}.
+
+    // a guess results in a changed score
+    ! t : guesSet(t,atMove(t)) => score(t, atMove(t)) - 1 = score(Next(t), atMove(t)) | score(t, atMove(t)) + 3 + subsequentPasses(t) = score(Next(t), atMove(t)).
+    // a changed scored indicates a guess
+    ! t : score(t, atMove(t)) - 1 = score(Next(t), atMove(t)) | score(t, atMove(t)) + 3 + subsequentPasses(t) = score(Next(t), atMove(t)) => guesSet(t, atMove(t)).
+}
+
+

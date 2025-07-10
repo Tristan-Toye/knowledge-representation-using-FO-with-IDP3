@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCS25 Project - Part 2</title>
+    <link rel="icon" type="image/x-icon" href="./static/deck/deck-stat/3dfb.svg">
+
+    <script type="text/javascript" src="./static/bower_components/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="./static/css/main.css">
+
+    <link rel="stylesheet" href="./static/bower_components/editor/codemirror.css">
+    <script src="./static/bower_components/editor/codemirror.js"> </script>
+    <script src="./static/bower_components/editor/idp.js"> </script>
+</head>
+
+<body>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+    <div id="menu-bar" style="display: flex;">
+        <a class="btn" href="./" >Home</a>
+        <a class="btn" href="./assignment">Assignment</a>
+        <a class="btn" href="./video">Demo video</a>
+        <a class="btn" href="#" id="download">Download</a>
+        <h1>MCS25 Part two - Multiplayer SET Game</h1>
+    </div>
+    
+    <div id="container" class="container">
+        <!-- The Left/Top box -->
+        <div class="box" id="b1">
+            <div class="header" id="b1-top">
+                <h3>Multiplayer engine</h3>
+                <p class="description">
+                    Let's develop the engine of the multiplayer Set game using the IDP system.
+                    Your task contains 8 parts (where the first two are already given) each responsible for certain functionality of the game.
+                    You can access these parts by clicking on the buttons below.
+                    Switching between parts will do the automatic saving of files.
+                    Files are also automatically saved when editing.
+                    <span style="color: #E16A54;"><b>Please make sure to read the assignment page, especially the "Important modeling note" section.</b></span>
+                    <b>Good luck!</b>
+                </p>
+            </div>
+
+            <div class="content box-border" id="b1-mid">
+                <div id="code-header">
+                    <div id="theory-buttons"></div>
+                    <p id="theory-description" class="description" style="padding: 5px;"></p>
+                    <hr>
+                </div>
+                <div id="theory-editor" class="editor"></div>
+            </div>
+
+            <div class="footer" id="b1-bot">
+                <h3>Console</h3>
+                <p></p>
+                <pre class="console" id="console"></pre>
+            </div>
+        </div>
+
+        <!-- The Middle/Middle box -->
+        <div class="box" id="b2">
+            <div id="b2-top">
+                <!-- <h3>Parameters</h3> -->
+                <label for="nplayer">Number of players:</label>
+                <input type="number" id="nplayer" name="nplayer" value="3" style="width: 40px;">
+
+                <label for="shuffle">Shuffled deck:</label>
+                <input type="checkbox" id="shuffle" name="shuffle" checked>
+
+                <button class="btn-small" id="reset">Init game</button>
+
+                <hr>
+
+                <div id="msg-1" class="msg-container" style="border-color: #79AC78; padding: 15px; display: grid; justify-content: center !important;">
+                    <span style="color: #79AC78; font-size: 18px;">Initialize the game for a content to appear!</span>
+                </div>
+
+                <h3 class="init-hide">Players controls</h3>
+                <p class="description init-hide">
+                    Here is the list of players (green player is at the move) and their available actions.
+                    Select an action (and cards from the table if needed) and hit "Make the step" to perform it.
+                </p>
+                <div id="players" class="init-hide"></div>
+            </div>
+
+            <div id="b2-mid" class="box-border init-hide" style="margin-top: 3px;">
+                <div id="b2-mid-header" class="lr-header init-hide">
+                    <h3 class="init-hide" style="margin-left: 5px;">Card table</h3>
+                    <button id="makestep" class="btn-small init-hide">Make the step</button>
+                </div>
+                <p id="b2-mid-paragraph" class="description init-hide">
+                    Here is the card table, you can click on a card to make it selected.
+                </p>
+                <div id="table" class="set-table init-hide"></div>
+            </div>
+        </div>
+
+        <!-- The Right/Bottom box -->
+        <div class="box" id="b3">
+            <div id="b3-top">
+                <div id="msg-2" class="msg-container" style="border-color: #79AC78; padding: 15px; display: grid; justify-content: center !important;">
+                    <span style="color: #79AC78; font-size: 18px;">Initialize the game for a content to appear!</span>
+                </div>
+
+                <h3 class="init-hide">Deck</h3>
+                <p class="description init-hide">
+                    Here is the visualization of the deck. The grayed out cards are those that were already used.
+                </p>
+                <div id="deck" class="msg-container init-hide" style="border-color: #A084DC;"></div>
+            </div>
+
+            <div id="b3-mid">
+                <h3 class="init-hide">Structure</h3>
+                <p class="description init-hide">
+                    Here is the structure representing the state of the game. 
+                    You can see that the values in this structure correspond and are in sync with the visualization of the game.
+                </p>
+                <pre class="structure init-hide" id="structure"></pre>
+            </div>
+            
+            <div id="b3-bot">
+                <h3 id="b3-bot-header" class="init-hide">History</h3>
+                <p id="b3-bot-paragraph" class="description init-hide">
+                    Here is the list of events representing the history of performed actions. 
+                </p>
+                <div id="msg" class="msg-box init-hide"></div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./static/js/set2.js"></script>
+</body>
+</html>

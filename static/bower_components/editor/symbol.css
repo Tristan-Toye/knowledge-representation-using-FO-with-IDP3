@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'STIXGeneral';
+  src: url('STIXMathJax_Main-Regular.woff');
+}
+
+.cm-lImplies:after, .cm-lForAll:after,.cm-lAnd:after ,.cm-lOr:after ,.cm-lDef:after ,.cm-lLImplies:after,.cm-lEquiv:after ,.cm-lExists:after,.cm-lLEQ:after ,
+.cm-lGEQ:after, .cm-lEQ:after ,.cm-lNEQ:after ,.cm-lLT:after ,.cm-lGT:after,.cm-lNot:after, .cm-lMapsTo:after {
+	color: black;
+	font-size: 18px;
+
+	font-family: STIXGeneral;
+  	-webkit-user-select: none;  /* Chrome all / Safari all */
+  	-moz-user-select: none;     /* Firefox all */
+  	-ms-user-select: none;      /* IE 10+ */
+
+  /* No support for these yet, use at own risk */
+  	-o-user-select: none;
+  	user-select: none;
+
+}
+
+.cm-lImplies, .cm-lForAll,.cm-lAnd ,.cm-lOr ,.cm-lDef ,.cm-lLImplies,.cm-lEquiv ,.cm-lExists,.cm-lLEQ ,
+.cm-lGEQ, .cm-lEQ ,.cm-lNEQ ,.cm-lLT ,.cm-lGT,.cm-lNot,.cm-lMapsTo {
+	color: transparent !important;
+}
+
+.cm-lImplies:after {content:'⇒';margin-left: -17px;}
+.cm-lForAll:after {content:'∀';margin-left: -10px;}
+.cm-lAnd:after {content:'∧';margin-left: -10px;}
+.cm-lOr:after {content:'∨';margin-left: -10px;}
+.cm-lDef:after {content:'←';margin-left: -17px;}
+.cm-lLImplies:after {content:'⇐';margin-left: -17px;}
+.cm-lEquiv:after {content:'⇔';margin-left: -24px;}
+.cm-lExists:after {content:'∃';margin-left: -10px;}
+.cm-lLEQ:after {content:'≤';margin-left: -17px;}
+.cm-lGEQ:after {content:'≥';margin-left: -17px;}
+.cm-lEQ:after {content:'=';margin-left: -10px;}
+.cm-lNEQ:after {content:'≠';margin-left: -17px;}
+.cm-lLT:after {content:'<';margin-left: -10px;}
+.cm-lGT:after {content:'>';margin-left: -10px;}
+.cm-lNot:after {content:'¬';margin-left: -10px;}
+.cm-lMapsTo:after {content:'↦';margin-left: -10px;}

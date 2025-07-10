@@ -1,0 +1,18 @@
+include "base-vocabulary.idp"
+
+
+vocabulary V_base_extended {
+    extern vocabulary V_base
+	type Prop constructed from {Number(), Shape(), Shade(), Color()}
+    cardsProp(Card, Prop): Value
+}
+
+
+theory T_base : V_base_extended {
+    {
+    ! n[Number] s[Shape] h[Shade] col[Color] : cardsProp(c(n, s, h, col), Number()) = n.
+    ! n[Number] s[Shape] h[Shade] col[Color] : cardsProp(c(n, s, h, col), Shape()) = s.
+    ! n[Number] s[Shape] h[Shade] col[Color] : cardsProp(c(n, s, h, col), Shade()) = h.
+    ! n[Number] s[Shape] h[Shade] col[Color] : cardsProp(c(n, s, h, col), Color()) = col.
+    }
+}

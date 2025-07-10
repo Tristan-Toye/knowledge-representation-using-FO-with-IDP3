@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCS25 Project - Part 1</title>
+    <link rel="icon" type="image/x-icon" href="./static/deck/deck-stat/3dfr.svg">
+
+    <script type="text/javascript" src="./static/bower_components/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="./static/css/main.css">
+
+    <link rel="stylesheet" href="./static/bower_components/editor/codemirror.css">
+    <script src="./static/bower_components/editor/codemirror.js"> </script>
+    <script src="./static/bower_components/editor/idp.js"> </script>
+
+    <script type="module" >
+        import {cardClic, dealClic, checkIfSet, areThereSets, showSets, reset} from './static/js/set1.js';
+        window.cardClic = cardClic;
+        window.dealClic = dealClic; 
+        window.checkIfSet = checkIfSet;
+        window.areThereSets = areThereSets;
+        window.showSets = showSets;
+        window.reset = reset;
+    </script>
+</head>
+
+<body>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+    <div id="menu-bar" style="display: flex;">
+        <a class="btn" href="./" >Home</a>
+        <a class="btn" href="./assignment">Assignment</a>
+        <a class="btn" href="#" id="download">Download</a>
+        <h1>MCS25 Part one - SET Game</h1>
+    </div>
+    <div id="container" class="container">
+        <!-- The Left/Top box -->
+        <div class="box" id="b1">
+            <div class="header" id="b1-top">
+                <h3>Game engine</h3>
+                <p class="description">
+                    Let's develop the engine of the Set game using the IDP system.
+                    Your task contains 3 parts each responsible for certain functionality of the game.
+                    You can access these parts by clicking on the buttons below.
+                    Switching between parts will do the automatic saving of files.
+                    Files are also automatically saved when editing.
+                    <b>Good luck, have fun!</b>
+                </p>
+            </div>
+
+            <div class="content box-border" id="b1-mid">
+                <div id="code-header">
+                    <div id="theory-buttons"></div>
+                    <p id="theory-description" class="description" style="padding: 5px;"></p>
+                    <hr>
+                </div>
+                <div id="theory-editor" class="editor"></div>
+            </div>
+
+            <div class="footer" id="b1-bot">
+                <h3>Console</h3>
+                <p></p>
+                <pre class="console" id="console"></pre>
+            </div>
+        </div>
+
+        <!-- The Center/Center box -->
+        <div id="b2" class="box">
+            <div id="b2-top">
+                <h3>Card table</h3>
+                <p class="description">
+                    The buttons below perform different actions.
+                    Number in the button (n) indicates the theory (on the left) responsible for its functionality.
+                    Select cards by clicking them and/or run some of the actions.
+                </p>
+            </div>
+
+            <div id="b2-mid" class="box-border">
+                <div id="control-buttons" style="display: flex;">
+                    <button class="btn-small" onclick="reset()">Reset</button>
+                    <button class="btn-small" onclick="dealClic()">Deal</button>
+                    <button class="btn-small" onclick="checkIfSet()">Check selected (2)</button>
+                    <button class="btn-small" onclick="areThereSets()">Are there sets (3)</button>
+                    <button class="btn-small" onclick="showSets()">Show sets (3)</button>
+                </div>
+                <hr>
+                <div id="table" class="set-table"></div>
+            </div>
+
+            <div id="b2-bot">
+                
+                <h3>Structures</h3>
+                <p class="description">
+                    Structures formally represent the actual state of affairs, i.e., the <i>card table</i> and <i>selected cards</i>.
+                    Notice that the state of the table and structures are in sync!
+                </p>
+
+                <h4>Card table</h4>
+                <pre class="structure" id="structure-table">structure S : V { }</pre>
+
+                <h4>Selected cards</h4>
+                <pre class="structure" id="structure"></pre>
+            </div>
+        </div>
+
+        <!-- The Right/Bottom box -->
+        <div id="b3" class="box">
+            <div id="b3-top">
+                <h3>History</h3>
+                <p class="description">
+                    Here you can see the history of responses.
+                    The green/red box indicates that your answer is correct/wrong!
+                    Verification is not provided for all features, in these cases the box is purple!
+                </p>
+                <hr>
+            </div>
+            <div id="b3-mid">
+                <div id="msg" class="msg-box"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

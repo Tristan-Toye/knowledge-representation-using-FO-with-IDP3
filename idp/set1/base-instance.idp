@@ -1,0 +1,4 @@
+
+structure S_base : V_base_extended {
+  
+}

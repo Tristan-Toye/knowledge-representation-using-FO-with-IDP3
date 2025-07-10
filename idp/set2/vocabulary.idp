@@ -1,0 +1,9 @@
+
+
+include "voc-fixed.idp"
+include "voc-student.idp"
+
+LTCvocabulary V_final {
+    extern vocabulary V_fixed
+    extern vocabulary V_student
+}

@@ -1,0 +1,20 @@
+theory T_score : V_final {
+    // HINT: Specify the (temporal) counter for "noSet" action.
+    // 1) Initially, this counter is 0
+    // 2) If someone does "noSet", it gets incremented for 1
+    // 3) In case of any other action, it gets reset to 0
+    
+    
+	// TODO: Score function update (causality)
+    // 1) If the player at the move guessed the set correctly:
+    //	Their score is incremented by 3 + counter of "noSet" actions.
+    // 2) If the player at the move guessed the set wrongly:
+    // 	Their score is decremented by 1.
+    
+    
+    // TODO: Define the score of players
+    // 1) Initially score is 0
+    // 2) Use the standard inertial rules (for function)
+
+    
+}

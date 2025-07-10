@@ -1,0 +1,68 @@
+theory T_score : V_final {
+  // --- subsequentPasses causalities ---
+  {
+    C_subsequentPasses(Start, 0).
+    ! t[Time] :
+      C_subsequentPasses(Next(t), subsequentPasses(t)+1)
+      <- noSet(t, atMove(t)).
+    ! t[Time] :
+      C_subsequentPasses(Next(t), 0)
+      <- guesSet(t, atMove(t)) | deal(t, atMove(t)).
+  }
+  { ! t[Time] n[Int] : subsequentPasses(t)=n <- C_subsequentPasses(t,n). }
+  
+  // --- score causalities ---
+  {
+    // init
+    ! p[Player] : C_score(Start,p,0).
+
+    // correct guess = +3 + streak
+    ! t[Time] p[Player] s[Int] :
+      C_score(Next(t),p, s + 3 + subsequentPasses(t))
+      <-  guesSet(t,p)
+      &   atMove(t)=p
+      &   score(t,p)=s
+      & #{c: selected(t,p,c)} = 3
+      &   ? c1[Card] c2[Card] c3[Card] :
+            selected(t,p,c1)
+          & selected(t,p,c2)
+          & selected(t,p,c3)
+          & c1~=c2 & c1~=c3 & c2~=c3
+          & ! prop[Prop] :
+              ( cardsProp(c1,prop)=cardsProp(c2,prop)
+              & cardsProp(c2,prop)=cardsProp(c3,prop) )
+            | ( cardsProp(c1,prop)~=cardsProp(c2,prop)
+              & cardsProp(c1,prop)~=cardsProp(c3,prop)
+              & cardsProp(c2,prop)~=cardsProp(c3,prop) ).
+    
+    
+    // wrong guess = –1
+    ! t[Time] p[Player] s[Int] :
+      C_score(Next(t),p, s - 1)
+      <-  guesSet(t,p)
+      &   atMove(t)=p
+      &   score(t,p)=s
+      & ((#{c: selected(t,p,c)} > 3 | #{c: selected(t,p,c)} < 3)
+      | ~( ? c1[Card] c2[Card] c3[Card] :
+             selected(t,p,c1)
+           & selected(t,p,c2)
+           & selected(t,p,c3)
+           & c1~=c2 & c1~=c3 & c2~=c3
+           & ! prop[Prop] :
+               ( cardsProp(c1,prop)=cardsProp(c2,prop)
+               & cardsProp(c2,prop)=cardsProp(c3,prop) )
+             | ( cardsProp(c1,prop)~=cardsProp(c2,prop)
+               & cardsProp(c1,prop)~=cardsProp(c3,prop)
+               & cardsProp(c2,prop)~=cardsProp(c3,prop) )
+           )).
+
+    // inertia for non‐guessers
+    ! t[Time] p[Player] s[Int] :
+      C_score(Next(t),p, s)
+      <- ~guesSet(t,p)
+      & score(t,p)=s.
+  }
+
+  // define score fluent
+  { ! t[Time] p[Player] sc[Int] : score(t,p)=sc <- C_score(t,p,sc). }
+}

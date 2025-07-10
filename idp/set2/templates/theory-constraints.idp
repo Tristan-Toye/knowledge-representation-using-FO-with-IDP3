@@ -1,0 +1,27 @@
+theory T_constraints : V_final {
+    
+    // At start table has exatly 9 cards.
+
+    
+    //The first 9 cards in the deck are initially at the table!
+    
+    
+    // It is possible to select cards only from the table.
+
+    
+    // Player can select cards only if at move and wants to gues a set.
+    
+    
+    // If a full loop of noSet actions took place:
+    // The player at the move has to deal.
+
+    
+    // An action can be performed only by a player at the move.
+    
+    
+    // There is at most one action per time.
+    
+    
+    // There is an action at each time point.
+    
+}

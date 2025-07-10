@@ -1,0 +1,29 @@
+include "vocabulary.idp"
+
+procedure writeTheHelpVoc(){
+    
+    local voc = "vocabulary Vss {" .. "\n" .. "extern vocabulary V_base\n"
+    
+    local b = tostring(V_base)
+    local v = tostring(V_final_ss)
+    
+    for line in v:gmatch("[^\r\n]+") do
+        if not (line:match("^%s*type") or line:match("^%s*vocabulary") or line:match("^%s*}") or line:match("^%s*deck%(Order%)") or line:match("^%s*cardsProp%(Card")) then
+            
+            voc = voc .. line .. "\n"
+            //print(line)
+        end
+    end
+    
+    voc = voc .. "}\n"
+    
+    
+    local file = io.open("vocabulary-help.idp", "w")
+
+    if file then
+        file:write(voc)
+        file:close()
+    else
+        print("Error opening file!")
+    end
+}

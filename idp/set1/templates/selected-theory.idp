@@ -1,0 +1,32 @@
+// DO NOT EDIT vocabulary "V_selected"
+vocabulary V_selected {
+	extern vocabulary V_base_extended
+    
+    // Predicate representing cards selected (on the table)
+    selected(Card)	 
+}
+
+vocabulary V_selected_extra {
+	extern vocabulary V_selected
+    // If needed introduce new predicate/function symbols here.
+
+}
+
+
+// This theory specifies notion of a "set" for selected cards.
+// Provides functionality for the button "Check selected".
+theory T_selected : V_selected_extra {
+    // NOTE: Theory T_base will be included in this theory; 
+    // So, you can use function cardsProp!
+    
+    // TODO:
+    // All "sets" are composed of exactly 3 cards
+    // Predicate selected contains exactly 3 cards 
+    
+    
+    // TODO:
+    // Express constraint for selected cards to form a "set".
+    // I.e., per property all values are same or different.
+    // Recall we reified properties so you can quantify over them
+    
+}

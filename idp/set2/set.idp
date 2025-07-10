@@ -1,0 +1,40 @@
+include "vocabulary.idp"
+include "theory-fixed.idp"
+include "theory-player.idp"
+include "theory-table.idp"
+include "theory-score.idp"
+include "theory-actions.idp"
+include "theory-constraints.idp"
+include "vocabulary-help.idp"
+include "structure.idp"
+include "copy-structure.idp"
+
+procedure init(){
+    stdoptions.nbmodels = 1
+    local t = merge(T_base, merge(T_player, merge(T_table, merge(T_score, merge(T_actions, T_constraints)))))
+
+    local states = initialise(t, S)
+    
+    if #states == 0 then
+        print("unsatisfiable")
+    else 
+        local m = states[1]
+        print(m)
+    end
+}
+
+procedure oneStepProgress(){
+    local s = copyStructure()
+    clean(s)
+    
+    local t = merge(T_base, merge(T_player, merge(T_table, merge(T_score, merge(T_actions, T_constraints)))))
+    stdoptions.nbmodels = 1
+    local states = progress(t, s)
+    
+    if #states == 0 then
+        print("unsatisfiable")
+    else 
+        local m = states[1]
+        print(m)
+    end
+}

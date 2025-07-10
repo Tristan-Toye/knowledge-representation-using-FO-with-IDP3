@@ -1,0 +1,17 @@
+LTCvocabulary V_student {
+    extern vocabulary V_time
+
+    numberOfCards: nat                      // Number of cards in game
+    numberOfPlayers: nat                    // Number of player is game
+    startPlayer: nat                        // Starting player
+    nextPlayer(Player): Player              // Gives next player
+    subsequentPasses(Time): Int             // Counts the number of subsequent passes
+    C_atMove(Time, Player)                  // Defining player at move
+    C_table(Time, Card)                     // Defining cards on table
+    Cn_table(Time, Card)                    // Defining cards to remove from table
+    C_inTheDeck(Time, Order)                // Defining first card in deck at current time
+    C_score(Time, Player, Int)              // Defining current score of players
+    C_subsequentPasses(Time, Int)           // Defing the number of passes
+
+    gameOver(Time)
+}

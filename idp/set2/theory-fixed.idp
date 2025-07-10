@@ -1,0 +1,12 @@
+theory T_base : V_final {
+    // Definition of the projection function for card properties
+    {
+        ! n[Number] s[Shape] d[Shade] c[Color] : cardsProp(c(n, s, d, c), Number) = n.
+        ! n[Number] s[Shape] d[Shade] c[Color] : cardsProp(c(n, s, d, c), Shape) = s.
+        ! n[Number] s[Shape] d[Shade] c[Color] : cardsProp(c(n, s, d, c), Shade) = d.
+        ! n[Number] s[Shape] d[Shade] c[Color] : cardsProp(c(n, s, d, c), Color) = c.
+    }
+    
+    // The deck assignes unique cards to order numbers
+    ! o1[Order] o2[Order] : o1 ~= o2 => deck(o1) ~= deck(o2).
+}

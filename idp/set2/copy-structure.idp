@@ -1,0 +1,82 @@
+include <table_utils>
+
+procedure copyStructure() {
+    // Create a new structure
+    //local newStruct = clone(S)
+    //setvocabulary(newStruct, V_final_ss)
+
+    local newStruct = newstructure(V_final_ss, "S1")
+
+    // Copy types
+    local tVo = totable(gettypes(V_final_ss))
+    local tVc = totable(gettypes(Vss))
+    
+   	for i = 1, #tVo do
+        local ta = tVo[i]
+        local tb = tVc[i]
+    	newStruct[ta] = S[tb]
+	end
+    
+    // Copy predicates
+    local pVo = totable(getpredicates(V_final_ss))
+    local pVc = totable(getpredicates(Vss))
+    
+   	for i = 1, #pVo do
+        local pa = pVo[i]
+        local pb = pVc[i]
+    	newStruct[pa] = S[pb]
+	end
+    
+    // Copy functions
+    local fVo = totable(getfunctions(V_final_ss))
+    local fVc = totable(getfunctions(Vss))
+    
+   	for i = 1, #fVo do
+        local fa = fVo[i]
+        local fb = fVc[i]
+    	newStruct[fa] = S[fb]
+	end
+	    
+    return newStruct
+}
+
+procedure copyStructure2() {
+    // Create a new structure
+    local newStruct = newstructure(V_final_ss, "S1")
+    
+    
+    local tVo = totable(gettypes(V_fixed_ss))
+    local tVc = totable(gettypes(Vss))
+    
+   	for i = 1, #tVo do
+        local ta = tVo[i]
+        local tb = tVc[i]
+    	newStruct[ta] = S[tb]
+	end
+    
+    
+    
+    // Copy predicates
+    local pVo = totable(getpredicates(V_fixed_ss))
+    local pVc = totable(getpredicates(Vss))
+    
+   	for i = 1, #pVo do
+        local pa = pVo[i]
+        local pb = pVc[i]
+    	newStruct[pa] = S[pb]
+	end
+    
+    // Copy functions
+    local fVo = totable(getfunctions(V_fixed_ss))
+    local fVc = totable(getfunctions(Vss))
+    
+   	for i = 1, #fVo do
+        local fa = fVo[i]
+        local fb = fVc[i]
+    	newStruct[fa] = S[fb]
+	end
+    
+	   
+    return newStruct
+    
+}

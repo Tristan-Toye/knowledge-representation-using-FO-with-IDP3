@@ -1,0 +1,23 @@
+theory T_actions : V_final {
+    // Possible actions at each time point:
+    {
+        // When not all players have passed, you can guess or pass
+        ! t p: possibleActions(t, guesSetA(p)) <- atMove(t) = p & subsequentPasses(t) < numberOfPlayers & #{c: table(t,c)} > 0 &  ~gameOver(t).
+        ! t p: possibleActions(t, noSetA(p))  <- atMove(t) = p & subsequentPasses(t) < numberOfPlayers & #{c: table(t,c)} > 0 &  ~gameOver(t).
+        
+        
+        // when all players have passed, then the current player can deal
+        ! t p: possibleActions(t, dealA(p))
+           <- atMove(t) = p
+           & subsequentPasses(t) = numberOfPlayers
+           &  ~gameOver(t)
+           & inTheDeck(t) =< (numberOfCards - 2).
+
+        // when the table is empty, you need to deal
+        ! t p: possibleActions(t, dealA(p))
+           <- atMove(t) = p
+           & #{c: table(t,c)} = 0
+           &  ~gameOver(t).
+       
+    }
+}

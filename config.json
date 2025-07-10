@@ -1,0 +1,9 @@
+{
+    "_comment_idp_path": "Leave this value empty if you want the system to try to find the command itself.",
+    "idp_path": "",
+    "_comment_timeout": "Change if you would like to increase IDP timeout (in seconds).",
+    "timeout": 20,
+    "_comment_port": "Change if you would like app to be on abother port.",
+    "port": 8000
+}
+  

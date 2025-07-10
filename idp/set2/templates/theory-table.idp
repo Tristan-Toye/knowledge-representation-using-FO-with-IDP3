@@ -1,0 +1,21 @@
+theory T_table : V_final {
+    // TODO: Define function inTheDeck
+    // This function is the pointer to the next card to be dealt
+    // 1) Initially pointer is 10 (because the first 9 cards are on the table)
+    // 2) If someone deals pointer is incremented for 3
+    // 3) If no one deals pointer remains the same (inertia)
+    
+
+    // TODO: Define casualties for the table fluent
+    // 1) If player at move dealt cards:
+    //	The three next cards in the deck are added to the table.
+    // 2) If the player at move correctly guessed the set:
+    //	Corresponding three carts are removed from the table.
+    
+    
+    // TODO: Define table fluent:
+    // 1) Initially first 9 cards from the deck are on the table.
+    // 2) Use standard inertial rules.
+    
+    
+}

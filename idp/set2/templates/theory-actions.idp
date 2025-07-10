@@ -1,0 +1,9 @@
+theory T_actions : V_final {
+    // TODO: Define the set of possible actions for each step:
+    // 1) Player at the move can do "guesSetA" and "noSetA" actions:
+    //	If it is not necessery to deal new cards.
+    // 2) If new cards have to be dealt: 
+    //	The only possible action is "dealA" for the player at the move.
+
+    
+}

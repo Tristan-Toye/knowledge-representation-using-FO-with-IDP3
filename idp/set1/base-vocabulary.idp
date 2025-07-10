@@ -1,0 +1,21 @@
+// This is the base vocabulary which is provided to you.
+// You can not edit this file!
+vocabulary V_base {
+    // Numbeer of objects on the card
+    type Number = {One; Two; Three}
+
+    // Shapes of objects on the card
+    type Shape = {Diamond; Squiggle; Oval}
+    
+    // Shade of objects on the card
+    type Shade = {Empty; Stripes; Full}
+
+    // Color of objects on the card
+    type Color = {Green; Blue; Red}
+
+    // Supertype of all properties
+    type Value contains Number, Shape, Shade, Color	
+    
+    // Type of cards constructed from all the properties
+    type Card constructed from {c(Number, Shape, Shade, Color)}	
+}

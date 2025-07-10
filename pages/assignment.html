@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCS25 Project - About</title>
+    <link rel="icon" type="image/x-icon" href="./static/deck/deck-stat/3ofg.svg">
+
+    <script type="text/javascript" src="./static/bower_components/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="./static/css/main.css">
+
+    <link rel="stylesheet" href="./static/bower_components/editor/codemirror.css">
+    <script src="./static/bower_components/editor/codemirror.js"> </script>
+    <script src="./static/bower_components/editor/idp.js"> </script>
+</head>
+
+<body>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+    <div id="menu-bar" style="display: flex;">
+        <a class="btn" href="./"> Home</a>
+        <a class="btn" href="./set1">Part one</a>
+        <a class="btn" href="./set2">Part two</a>
+        <h1>MCS25 Project description</h1>
+    </div>
+    
+    <div id="container" class="container">
+        <div class="box scroll-box">
+            <h3>About the MCS project in general</h3>
+            <br>
+            <p class="description">
+                The project is on modeling and reasoning on temporal systems using LTC and IDP3. It consists of two parts:
+            </p>
+
+            <hr>
+            <p class="description">
+                <b>Part one: Simple static system:</b> May be done in teams of 2, or individually.
+                You will be given an informal but precise description of a small domain, along with a simple given vocabulary and visualization tools.
+            </p>
+            <p class="description">
+                Each group designs a solution consisting of:
+                An extended vocabulary consisting of types, predicate, and/or function symbols, along with informal interpretations written in comments.
+                A simple theory aligned with the given description of the system.
+                Some example structures to test your theory with.
+                This part will be corrected through a combination of manual inspection and automatic testing. A model solution will be provided afterward.
+            </p>
+
+            <hr>
+            <p class="description">
+                <b>Part two: Complex LTC system:</b>
+                Individual work.
+                You will be given a temporal extension and refinement of the system from the first part.
+                You will be provided with a formal base vocabulary (which you will be allowed to extend).
+                Each student designs an LTC solution and submits it.
+                For this part, you will be provided with test examples, and visualisation of solutions (this should help you design the correct specification).
+                This part will be automatically corrected. A model solution will be provided afterward.
+            </p>
+
+            <hr>
+            <p class="description">
+                <b>Rules</b>
+                The project is obligatory; you cannot participate in the exam unless you have submitted the 2 parts of the project!
+                Together, the two project parts will take up to 30 hours. Please keep track of your time on the project and warn us if you spend more.
+                There is no way to redo the project in the summer, unless for compelling reasons.
+                There is no way to transmit scores of the project from last year.
+                You are allowed to discuss this project with others. However, you are not allowed to make your code openly available on the web. 
+                If you want to use git, do not use public repositories.
+            </p>
+
+            <hr>
+            <p class="description">
+                <b>Grading</b>
+                The project is graded on 5/20 points:
+                <ul>
+                    <li><b>(3,5p)</b> points are for the part during the semester (2 parts of the project).</li>
+                    <ul>
+                        <li><b>(1.0p)</b> First part - Corrected through a combination of manual inspection and automatic testing. Design choices will be graded (sensible vocabulary, proper choices between function and predicates, etc.)</li>
+                        <li><b>(2.5p)</b> Second part - Automatically corrected. The correctness of the solution will be tested with model checking.</li>
+                    </ul>
+                    <li><b>(1.5p)</b> points are for questions in the exam, on temporal logic CTL and LTL and/or refinement.</li>
+                </ul>
+            </p>
+
+            <br>
+            <h3>Additional info</h3>
+            <br>
+            <p class="description">
+                <b>Using IDP-IDE</b>
+                In case you would like to use IDP-IDE to edit your files, you can set the workspace to `./idp/set1/` (here `.` stands for the root of the project). Make sure not to edit files in the `template` directory.
+            </p>
+            <hr>
+            <p class="description">
+                <b>Submitting solution</b>
+                When you finish your project, download the files with the web app (there is a button download in the top menu), put your u/r/s number (with the letter) and upload it to the Toledo assignment page. 
+                If you are working in a pair, add the u/r/s/ number of your teammate in parentheses after your id (e.g., "r123456(r654321)"). 
+                Note that both members of the team should upload the solution, however, it should be the same.
+                You can upload your solution multiple times, only the last version will be considered.
+            </p>
+        </div>
+
+
+        <div class="box scroll-box">
+            <h3>About the concrete MCS project 2025</h3>
+            <br>
+            <p class="description">
+                As a this year (2025) project assignment for the course MCS we will model the card game named "Set".
+                This is a turn-based multiplayer game with a custom deck, and hence suitable to represent as a linear temporal system.
+                Following are the explanations of cards, how they form a "set", and game rules used for this project.
+            </p>
+            
+            <hr>
+            <p class="description">
+                <b>Cards</b> in this game are described by four properties (Number, Color, Shade, Shape).
+                Each of the properties has three possible values: Number is either 1, 2, or 3; Color is either Red, Green, or Orange; Shade is either Empty, Stripes, or Full; Shape is either Diamond, Squiggle, or Oval.
+                These properties describe how many and what kind of objects can be found on the card.
+            </p>
+            <p class="description">
+                For example, the following card contains <b><span id="card-info">One Oval Full Red</span></b> object(s). <button class="btn-small" id="randomCard">Generate new</button> 
+            </p>
+            <div style="text-align: center;">
+                <img id="card" class="menu-card" src="./static/deck/deck-stat/1ofr.svg">
+            </div>
+
+            <hr>
+            <p class="description">
+                Three cards form a <b>set</b> (of cards) if for each property either:
+                <ul>
+                    <li>All three have the same value for that property.</li>
+                    <li>All three have distinct values for that property.</li>
+                </ul>
+            </p>
+            <p class="description">
+                For example, the following triple <b>is not a set</b>! <button class="btn-small" id="randomNonSet">Generate new</button>
+            </p>
+            <div style="text-align: center;">
+                <img id="card-1" class="menu-card" src="./static/deck/deck-stat/1ofr.svg">
+                <img id="card-2" class="menu-card" src="./static/deck/deck-stat/1deg.svg">
+                <img id="card-3" class="menu-card" src="./static/deck/deck-stat/2osb.svg">
+            </div>
+            <p class="description">
+                For example, the following triple <b>is a set</b>! <button class="btn-small" id="randomSet">Generate new</button>
+            </p>
+            <div style="text-align: center;">
+                <img id="cards-1" class="menu-card" src="./static/deck/deck-stat/1dsr.svg">
+                <img id="cards-2" class="menu-card" src="./static/deck/deck-stat/2ssg.svg">
+                <img id="cards-3" class="menu-card" src="./static/deck/deck-stat/3osb.svg">
+            </div>
+
+            <hr>
+            <p class="description">
+                For this project, we proceed with the following variation of the <b>game rules</b>:
+                <ul>
+                    <li>There are n players (n > 1).</li>
+                    <li>Initially, the score of each player is zero.</li>
+                    <li>Initially there are nine cards at the card table.</li>
+                    <li>Players take turns one by one in a circular manner.</li>
+                    <li>When on a turn, the player has two options.</li>
+                    <ol>
+                        <li>Guess if something is a set.</li>
+                        <li>Claim there are no sets at the card table.</li>
+                    </ol>
+                    <li>If the player guessed correctly, their score gets increased by 3 points plus 1 point for each player in a chain immediately before them that claimed there is no set at the table (this resets if cards are added to the table).</li>
+                    <li>If a player guessed wrongly, their score gets reduced by 1 point.</li>
+                    <li>If all n players consecutively claim that there is no set at the table, the player that is next on the move (the one that claimed first) deals three cards to the table and stays on turn (to guess or claim no set).</li>
+                    <li>The game is over when there are no more cards to deal with, and the loop of n players claims there is no set at the table.</li>
+                    <li>The winner is the player with the biggest score.</li>
+                    <li>The tiebreaker is the last set guessed (who is the last to guess the set, they win).</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="box scroll-box">
+            <h3>About the part one</h3>
+            <br>
+            <p class="description">
+                For the first part of the project, your task is to develop basic concepts for the "Set game" using the IDP3 system.
+                The first task is extending the vocabulary (under the button "1. Cards"). 
+                Choosing the symbols in the right way is important for this step, and it will be reflected in your grade. 
+                As the second step, you will have to model the notion of the "set" of cards.
+                Finally, you will model a set of all "sets" among some group of cards (i.e., cards that are on the table).
+            </p>
+            <p class="description">
+                The idea is that you can gradually implement functionalities of the actions/buttons in the interface. 
+                For example, once you are done with the "2. Sets" theory, the button "Check selected" should work correctly.
+                Similar for the "3. Card table" theory and buttons "Are there sets" and "Show sets". 
+            </p>
+            <p class="description">
+                Opening different parts of your task "1. Cards", "2. Sets", and "3. Card table" will also present a short description of the purpose of that part.
+                Often you will find hints and suggestions along the comments in the IDP code, so make sure to read them.
+            </p>
+            <br>
+
+            <h3>About the part two</h3>
+            <br>
+            <p class="description">
+                For the second part of the project, your task is to develop the full version of the multiplayer "Set game" using the IDP3 LTC system (checkout the <a href="./video">Demo video</a>).
+                This part is substantially more difficult than the first part, however, some concepts will be reused from the first part.
+            </p>
+            <p class="description">
+                The first two files, "1. Voc fixed" and "2. Theory fixed" are provided for you as a starting point (these files can not be edited). 
+                The remaining files split the task into smaller conceptual units; in this way, you can implement parts of the system one by one. 
+                It is good practice to make sure that before switching to the new part, the previous parts work correctly. 
+                In the description of each part, you will find what functionalities would be covered by it. 
+                Similar to the first part of the project, along with the comments, you can find useful hints. 
+            </p>
+            <br>
+
+            <h3 style="color: #E16A54;">Important modeling note</h3>
+            <br>
+            <p class="description">
+                The usual way of expressing causalities and successor state axioms (as studied in this course) is insufficient for this project. 
+                This is because we want to run an interactive play simulation. 
+                For this purpose, defining causalities to have an effect with a delay (as presented in the "Standard solution") does not work. 
+                The reason is technical, and the solution is to use a more general definition of causalities and successor state axioms (presented in "Generalized solution"). 
+                We demonstrate these changes on the "Book" example.
+                <span style="color: #E16A54;"><b>Please study these carefully before you start working on the project!</b></span>
+            </p>
+
+            <div class="content box-border">
+                <div id="code-header">
+                    <div id="theory-buttons"></div>
+                    <p id="theory-description" class="description" style="padding: 5px;"></p>
+                    <hr>
+                </div>
+                <div id="theory-editor" class="editor"></div>
+            </div>
+
+            <p class="description" style="color: #E16A54;">
+                <b>For this project, you are required to use this generalized definition of causalities and successor state axioms. 
+                Note that otherwise, your solution will not work with the play inference.</b>
+            </p>
+
+        </div>
+    </div>
+
+<script type="module" src="./static/js/assignment.js"></script>
+</body>
+</html>

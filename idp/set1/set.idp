@@ -1,0 +1,41 @@
+include "base-theory.idp"
+include "base-instance.idp"
+
+include "selected-theory.idp"
+include "selected-instance.idp"
+
+include "table-theory.idp"
+include "table-instance.idp"
+
+procedure checkIfSet() {
+  stdoptions.nbmodels=1
+  models = modelexpand(merge(T_base,T_selected), S_selected)
+
+  if #models == 0 then
+    print("false")   
+  else
+    print("true")
+  end
+}
+
+procedure findSetsOnTable() {
+  stdoptions.nbmodels=1
+  model = onemodel(merge(T_base,T_table), S_table)
+
+  if model then
+    print(model[V_table::setsOnTable].ct)
+  else
+    print("unsatisfiable")
+  end
+}
+
+procedure areThereSetsOnTheTable(){
+  stdoptions.nbmodels=1
+  models = modelexpand(merge(merge(T_base, T_table), T_table_has_set), S_table)
+  
+  if #models == 0 then
+    print("false")        
+  else
+    print("true")
+  end
+}

@@ -1,0 +1,60 @@
+vocabulary V_base {
+    // Limitation of integers to serve for the score function
+    type Int = {-100..100} isa int          
+    // Type representing order of cards in a deck
+    type Order = {1..81} isa nat        
+    
+    // Numbeer of objects on the card
+    type Number = {One; Two; Three}
+    // Shapes of objects on the card
+    type Shape = {Diamond; Squiggle; Oval}
+    // Shade of objects on the card
+    type Shade = {Empty; Stripes; Full}
+    // Color of objects on the card
+    type Color = {Green; Blue; Red}
+
+    // Supertype of all properties
+    type Value contains Number, Shape, Shade, Color
+    // Type of cards constructed from all the properties
+    type Card constructed from {c(Number, Shape, Shade, Color)}
+    // Reification of property types
+    type Prop constructed from {Number, Shape, Shade, Color}    
+    
+    // Type player which is a natural number
+    type Player isa nat     
+    // Type representing possible actions 
+    type Action constructed from {guesSetA(Player), noSetA(Player), dealA(Player)}  
+
+    // Function mapping cards and property to a value
+    cardsProp(Card, Prop) : Value
+    // Function mapping order number to a card (representing a deck)
+    deck(Order) : Card
+}
+
+// Standard time vocabulary
+LTCvocabulary V_time(Time,Start,Next) {
+    extern vocabulary V_base
+    
+    type Time isa nat   // Type time which is natural number
+    Start : Time        // Starting point of time
+    Next(Time):Time     // Time next function
+}
+
+// Temporal vocabulary
+LTCvocabulary V_fixed {
+    extern vocabulary V_time
+
+    // Action symbols
+    guesSet(Time, Player)   // Action of guessing a set
+	noSet(Time, Player)     // Action of claming no set
+	deal(Time, Player)      // Action of dealing new cards
+
+    selected(Time, Player, Card)    // Set of cards player clames to be the set
+    
+    // Fluents
+    atMove(Time) : Player           // Player currently at the move
+    score(Time, Player) : Int       // Score of players
+    table(Time, Card)               // Cards at the table
+	possibleActions(Time, Action)   // Set of possible action
+    inTheDeck(Time) : Order         // Pointer to a position in the deck
+}

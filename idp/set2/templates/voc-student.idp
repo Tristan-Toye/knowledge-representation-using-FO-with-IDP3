@@ -1,0 +1,6 @@
+LTCvocabulary V_student {
+    extern vocabulary V_time
+    
+    // Here you can add new symbols
+    // They will be available in all other theories
+}

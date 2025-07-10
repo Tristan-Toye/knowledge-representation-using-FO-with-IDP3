@@ -1,0 +1,31 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Mini</title>
+
+	<link rel="stylesheet" href="codemirror.css">
+	<script src="codemirror.js"></script>
+	<script src="idp.js"></script>
+	<link rel="stylesheet" href="symbol.css" id="symbolCSS">
+
+	<script>
+	window.onload = function(){
+
+		CodeMirror.fromTextArea(document.getElementById("codeArea"), {
+    		lineNumbers: true,
+    		mode: "idp"
+  		});
+		var codeMirrorOptions = {
+		mode: "idp"
+		};
+	}
+
+	</script>
+
+</head>
+<body>
+
+<textarea id="codeArea">ha</textarea>
+
+</body>
+</html>

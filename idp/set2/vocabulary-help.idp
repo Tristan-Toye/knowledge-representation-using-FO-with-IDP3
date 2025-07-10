@@ -1,0 +1,24 @@
+vocabulary Vss {
+extern vocabulary V_base
+  C_atMove(Player)
+  C_inTheDeck(Order)
+  C_score(Player,Int)
+  C_subsequentPasses(Int)
+  C_table(Card)
+  Cn_table(Card)
+  deal(Player)
+  gameOver
+  guesSet(Player)
+  noSet(Player)
+  possibleActions(Action)
+  selected(Player,Card)
+  table(Card)
+    atMove : Player
+    inTheDeck : Order
+    nextPlayer(Player) : Player
+    numberOfCards : nat
+    numberOfPlayers : nat
+    score(Player) : Int
+    startPlayer : nat
+    subsequentPasses : Int
+}

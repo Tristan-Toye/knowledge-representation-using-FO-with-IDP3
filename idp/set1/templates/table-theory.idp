@@ -1,0 +1,48 @@
+// DO NOT EDIT this vocabulary!
+vocabulary V_table {
+	extern vocabulary V_base_extended
+    
+    table(Card)
+    setsOnTable(Card, Card, Card)
+}
+
+
+vocabulary V_table_extra {
+	extern vocabulary V_table
+    // If needed introduce new predicate/function symbols here.
+}
+
+
+// This theory specifies all the sets on the table.
+// Provides functionality for the button "Show sets".
+theory T_table : V_table_extra {
+    
+   	// NOTE
+    // Theory T_base will be included in this theory; 
+    // So, you can use function cardsProp!
+    
+    // TODO:
+    // Define the predicate "setsOnTable". 
+    // It contains triples of cards from the table that form a set.
+    {
+        
+    }
+    // TODO
+    // Normally this definition includes symmetries.
+    // There are 6 permutations for the same 3 cards.
+    // Add the symmetry brake constraint to the definition.
+    // Accept "setsOnTable(c1, c2, c3)" iff c1 > c2 and c2 > c3.
+}
+
+
+// This theory expresses requirement that a set exists on the table
+// Provides functionality for the button "Are there sets".
+theory T_table_has_set : V_table_extra {
+    
+    // NOTE
+    // Theory V_table_extra will be included in this theory; So, you can use setsOnTable and cardsProp!
+    
+    // TODO
+    // Express a constraint that there is a set on the table.
+    
+}

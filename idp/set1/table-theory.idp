@@ -1,0 +1,32 @@
+vocabulary V_table {
+	extern vocabulary V_base_extended
+    
+    table(Card)
+    setsOnTable(Card, Card, Card)
+}
+
+
+vocabulary V_table_extra {
+	extern vocabulary V_table
+
+}
+
+theory T_table : V_table_extra {
+    {
+        ! c1[Card] c2[Card] c3[Card] : 
+            setsOnTable(c1, c2, c3) <- 
+                table(c1) & table(c2) & table(c3) &
+                c1 > c2 & c2 > c3 &  
+                c1 ~= c2 & c2 ~= c3 & c1 ~= c3 &  
+                (! p[Prop] : 
+                    (cardsProp(c1, p) = cardsProp(c2, p) & cardsProp(c2, p) = cardsProp(c3, p)) |
+                    (cardsProp(c1, p) ~= cardsProp(c2, p) & 
+                     cardsProp(c2, p) ~= cardsProp(c3, p) & 
+                     cardsProp(c1, p) ~= cardsProp(c3, p))
+                ).
+    }
+}
+
+theory T_table_has_set : V_table_extra {
+    ? c1[Card] c2[Card] c3[Card] : setsOnTable(c1, c2, c3).
+}

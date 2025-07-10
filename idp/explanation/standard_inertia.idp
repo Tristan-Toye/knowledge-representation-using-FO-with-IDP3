@@ -1,0 +1,22 @@
+Theory T_book : V_book {
+ {
+  // Successor State Action Axiom & Inertia
+  ! p[P] b[B]: owns(Start,p,b) <- I_owns(p,b).
+
+  // This rule defines the next time point in terms of now
+  // Next appears in the head and not in the body!
+  ! t[T] p[P] b[B]: owns(Next(t),p,b) <- C_owns(t,p,b).
+                        
+  // This rule defines the next time point in terms of now
+  // Next appears in the head and not in the body!
+  ! t[T] p[P] b[B]: owns(Next(t),p,b) <- owns(t,p,b) & ~Cn_owns(t,p,b).
+ }
+
+ {
+   // Expressing causations (No delay)
+   // These rules are defining causations without delay
+   // Next does not appear neither in head nor in body!
+   ! t[T] p[P] b[B]: C_owns(t,p,b) <- ? q[P]: give(t,q,b,p).
+   ! t[T] p[P] b[B]: Cn_owns(t,p,b) <- ? q[P]: give(t,p,b,q).
+ } 
+}

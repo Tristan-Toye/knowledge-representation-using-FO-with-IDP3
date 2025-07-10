@@ -1,0 +1,20 @@
+include "base-theory.idp"
+
+vocabulary V_selected {
+	extern vocabulary V_base_extended
+    selected(Card)	 
+}
+
+vocabulary V_selected_extra {
+	extern vocabulary V_selected
+}
+
+theory T_selected : V_selected_extra {
+    #{ c[Card] : selected(c) } = 3.
+    
+    ! p[Prop] : 
+        ( #{ v[Value] : ? c[Card] : selected(c) & cardsProp(c, p) = v } = 1 ) |
+        ( #{ v[Value] : ? c[Card] : selected(c) & cardsProp(c, p) = v } = 3 ).
+    
+    
+}

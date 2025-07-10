@@ -1,0 +1,25 @@
+theory T_player : V_final {
+    // HINT: Specify the constant denoting the number of players
+    
+    
+    // HINT: Specify the constant denoting the first players
+   
+    
+    // HINT: Define the function mapping a player to the next player
+	
+    
+    // TODO: Define player that is at the move - atMove(Time) : Player
+    // 1) At the start, the first player is at the move:
+    // 	That is the player denoted with the smallest number
+    // 2) If player p is at the move now and didn't deal:
+    // 	Player at the move at the next step is (p + 1 % numebrOfPlayers)
+    // 3) If player p is at the move now and did deal:
+    //	The player remains the same.
+    // HINT: Use definition!
+    
+    
+    
+
+    // HINT: To test this part, add an axiom enabling all actions.
+	// ! t[Time] a[Action]: possibleActions(t, a).
+}

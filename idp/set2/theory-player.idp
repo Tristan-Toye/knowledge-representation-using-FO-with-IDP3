@@ -1,0 +1,21 @@
+theory T_player : V_final {
+    // Define nextPlayer function
+
+    numberOfPlayers = MAX[:Player].
+    startPlayer = MIN[:Player]. 
+    
+    ! p[Player]: p < numberOfPlayers => nextPlayer(p) = p + 1.
+    nextPlayer(numberOfPlayers) = startPlayer.
+
+    // Define C_atMove causalities
+    {
+        C_atMove(Start, startPlayer).                                   
+        ! t: C_atMove(Next(t), nextPlayer(atMove(t))) <- guesSet(t, atMove(t)) | noSet(t, atMove(t)).
+        ! t: C_atMove(Next(t), atMove(t)) <- deal(t, atMove(t)).
+    }
+
+    // Define atMove fluent
+    {
+        ! t p: atMove(t) = p <- C_atMove(t, p).
+    }
+}

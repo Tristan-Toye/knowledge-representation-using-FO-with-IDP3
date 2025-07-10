@@ -1,0 +1,4 @@
+structure S_table : V_table_extra {
+  table = {
+  }
+}

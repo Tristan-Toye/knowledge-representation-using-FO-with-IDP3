@@ -1,0 +1,42 @@
+theory T_table : V_final {
+    // --- inTheDeck pointer causalities ---
+    {
+        // Initially, the first 9 cards are on the table, so pointer is at 10
+        C_inTheDeck(Start, 10).
+        // When a deal action happens, advance pointer by 3
+        ! t o: C_inTheDeck(Next(t), o + 3) <- inTheDeck(t) = o & deal(t, atMove(t)).
+        // When a deal action happens, advance pointer by 2 if last hand dealt
+        ! t o: C_inTheDeck(Next(t), o + 2) <- inTheDeck(t) = o & deal(t, atMove(t)) & (o + 2)=numberOfCards.
+        // Otherwise, pointer stays the same (inertia)
+        ! t o: C_inTheDeck(Next(t), o) <- inTheDeck(t) = o & ~deal(t, atMove(t)).
+    }
+    {
+        ! t o: inTheDeck(t) = o <- C_inTheDeck(t, o).
+    }
+    
+    {
+    // Adding the three cards when a deal occurs
+    ! t[Time] :
+        C_table(Next(t), deck(inTheDeck(t)))       <- deal(t, atMove(t)).
+    ! t[Time] :
+        C_table(Next(t), deck(inTheDeck(t)+1))     <- deal(t, atMove(t)).
+    ! t[Time] :
+        C_table(Next(t), deck(inTheDeck(t)+2))     <- deal(t, atMove(t)).
+
+    // Removing the three selected cards only if they form a valid set
+    ! t[Time] c[Card] :
+        Cn_table(Next(t), c)
+      <-  guesSet(t, atMove(t))
+      &   selected(t, atMove(t), c)
+      &   score(t, atMove(t)) + 3 + subsequentPasses(t) = score(Next(t), atMove(t)) .
+  }
+    {
+        // Initially, cards 1 through 9 are on the table
+        ! o: table(Start, deck(o)) <- o =< 9.
+        // Add cards caused by C_table
+        ! t c: table(Next(t), c) <- C_table(Next(t), c).
+        // Inertia: keep table cards unless removed by Cn_table
+        ! t c: table(Next(t), c) <- table(t, c) & ~Cn_table(Next(t), c).
+    }
+
+}
